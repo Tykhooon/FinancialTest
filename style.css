@@ -1,0 +1,100 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f7fa;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  .container {
+    max-width: 700px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+  
+  .title {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+  }
+  
+  .question {
+    margin-bottom: 30px;
+  }
+  
+  .question-title {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #444;
+  }
+  
+  .option {
+    display: block;
+    margin: 5px 0;
+    padding: 10px;
+    background: #f0f0f5;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+  }
+  
+  .option:hover {
+    background: #e0e0ee;
+  }
+  
+  .submit-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: #007bff;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .submit-btn:hover {
+    background: #0056b3;
+  }
+  
+  .score-output {
+    margin-top: 20px;
+    font-size: 20px;
+    text-align: center;
+    color: #222;
+    font-weight: bold;
+  }
+
+  .send-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: #14d531;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .name-input {
+    display: block;
+    width: 70%; /* Made it larger */
+    padding: 16px; /* Increased padding further for more internal space */
+    margin: 50px auto; /* Kept vertical margin and horizontal centering */
+    border: 2px solid #bbb; /* Slightly thicker and darker border for better visibility */
+    border-radius: 8px; /* Slightly more rounded corners */
+    font-size: 20px; /* Increased font size for larger text */
+    line-height: 1.5; /* Add some vertical spacing for the text */
+    background-color: #fefefe; /* Very light background, almost white */
+    box-sizing: border-box; /* Ensure padding and border are within the width */
+  }
+
+  
+  
+  
