@@ -1,27 +1,20 @@
-const answers = {}; // Store selected values for each question
+let dict = {}; // Global dictionary to store results per data-question
 
-// Add event listeners to all radio inputs
+// Add event listeners to all radio buttons
 document.querySelectorAll('input[type="radio"]').forEach(input => {
   input.addEventListener('change', () => {
-    const name = input.name; // e.g. "q1", "q2"
-    const value = parseInt(input.value);
-    answers[name] = value;
+    const questionDiv = input.closest('.question');
+    const questionKey = questionDiv.getAttribute('data-question');
+    const score = parseInt(input.value);
+
+    dict[questionKey] = score;
   });
 });
 
-// When user clicks "Get Score"
 function getFinalScore() {
-  let totalScore = 0;
-  const numQuestions = document.querySelectorAll('.question').length;
-
-  for (let i = 1; i <= numQuestions; i++) {
-    totalScore += answers[`q${i}`] || 0; // 0 if not answered
+    document.getElementById("final-score").innerText = "Результат отримано. Введіть своє ім’я і натисніть «Надіслати в WhatsApp»";
   }
-
-  document.getElementById("final-score").innerText = `Ваш загальний бал: ${totalScore}`;
-
-  // return total score
-}
+  
 
 function sendResult() {
     const name = document.getElementById("name").value.trim();
@@ -30,21 +23,12 @@ function sendResult() {
       return;
     }
   
-    // Reuse the score or recalculate (you can skip this part if score already saved)
-    let totalScore = 0;
-    const numQuestions = document.querySelectorAll('.question').length;
-    for (let i = 1; i <= numQuestions; i++) {
-      totalScore += answers[`q${i}`] || 0;
-    }
-  
-    const message = `Привіт! Я пройшов(ла) тест!\nІм’я: ${name}\nМій результат: ${totalScore}`;
+    const message = `Привіт! Я пройшов(ла) тест!\nІм’я: ${name}\nМій результат: ${JSON.stringify(dict)}`;
     const encodedMessage = encodeURIComponent(message);
     
     // Replace with your WhatsApp number if you want to direct it to specific chat:
     // e.g. `https://wa.me/380XXXXXXXXX?text=${encodedMessage}`
     const whatsappLink = `https://wa.me/380673120040?text=${encodedMessage}`;
   
-    window.open(whatsappLink, "_blank");
+    window.open(whatsappLink);
   }
-  
-
