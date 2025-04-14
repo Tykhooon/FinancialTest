@@ -90,18 +90,38 @@ body {
     transition: background 0.3s;
   }
 
-  .name-input {
+.name-input {
     display: block;
-    width: 70%; /* Made it larger */
-    padding: 16px; /* Increased padding further for more internal space */
-    margin: 50px auto; /* Kept vertical margin and horizontal centering */
-    border: 2px solid #bbb; /* Slightly thicker and darker border for better visibility */
-    border-radius: 8px; /* Slightly more rounded corners */
-    font-size: 20px; /* Increased font size for larger text */
-    line-height: 1.5; /* Add some vertical spacing for the text */
-    background-color: #fefefe; /* Very light background, almost white */
-    box-sizing: border-box; /* Ensure padding and border are within the width */
+    width: 100%;
+    padding: 20px;
+    margin: 20px auto;
+    border: 2px solid #888;
+    border-radius: 10px;
+    font-size: 24px;
+    min-height: 60px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
   }
+  
+  .name-input:focus {
+    outline: none;
+    border-color: #3a86ff;
+    box-shadow: 0 0 8px rgba(58, 134, 255, 0.5);
+  }
+
+  #name {
+    width: 90%;
+    padding: 20px;
+    font-size: 24px;
+    border: 2px solid #888;
+    border-radius: 10px;
+    margin: 20px auto;
+    display: block;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+  }
+  
 
   
   
