@@ -17,7 +17,6 @@ body {
   @media (max-width: 900px) {
     .container {
       width: 95%;
-      margin: auto;
       background: white;
       padding: 30px;
       border-radius: 10px;
