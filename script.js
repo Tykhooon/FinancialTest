@@ -1,34 +1,73 @@
-let dict = {}; // Global dictionary to store results per data-question
+// Global object to store scores per category
+let egoScores = {};
+let answered = 0;
 
-// Add event listeners to all radio buttons
+// Add event listeners to all radio inputs
 document.querySelectorAll('input[type="radio"]').forEach(input => {
   input.addEventListener('change', () => {
     const questionDiv = input.closest('.question');
-    const questionKey = questionDiv.getAttribute('data-question');
-    const score = parseInt(input.value);
+    const category = questionDiv.getAttribute('data-question');
+    const value = parseInt(input.value);
 
-    dict[questionKey] = score;
+    // If category not set, initialize
+    if (!egoScores[category]) {
+      egoScores[category] = 0;
+    }
+
+    // Remove previous value for the same question if already selected
+    const name = input.name;
+    const previousInput = document.querySelector(`input[name="${name}"]:checked`);
+    if (previousInput && previousInput !== input) {
+      const previousValue = parseInt(previousInput.value);
+      egoScores[category] -= previousValue;
+    }
+
+    // Add the new score
+    egoScores[category] += value;
+    answered++;
   });
 });
 
 function getFinalScore() {
-    document.getElementById("final-score").innerText = "Результат отримано. Введіть своє ім’я і натисніть «Надіслати в WhatsApp»";
+  if (answered < 10) {
+    // Show a message that not all questions have been answered
+    document.getElementById("final-score").innerText = "Дайте відповідь на всі питання!";
+    
+    // Change the text color to red to highlight the error
+    document.getElementById("final-score").style.color = "red";
+    
+    return; // Exit the function to prevent showing the score
   }
-  
+
+  let maxResult = 0;
+  let maxCategory = "";
+
+  for (let key in egoScores) {
+    if (egoScores[key] > maxResult) {
+      maxResult = egoScores[key];
+      maxCategory = key;
+    }
+  }
+
+  document.getElementById("final-score").innerText = 
+    "Ваш максимальний результат: " + maxCategory + " – " + maxResult + "\n Введіть своє імʼя і натисніть Надіслати на WhatsApp";
+  document.getElementById("final-score").style.color = "green";
+
+}
 
 function sendResult() {
-    const name = document.getElementById("name").value.trim();
-    if (!name) {
-      alert("Будь ласка, введіть ваше ім’я.");
-      return;
-    }
-  
-    const message = `Привіт! Я пройшов(ла) тест!\nІм’я: ${name}\nМій результат: ${JSON.stringify(dict)}`;
-    const encodedMessage = encodeURIComponent(message);
-    
-    // Replace with your WhatsApp number if you want to direct it to specific chat:
-    // e.g. `https://wa.me/380XXXXXXXXX?text=${encodedMessage}`
-    const whatsappLink = `https://wa.me/380673120040?text=${encodedMessage}`;
-  
-    window.open(whatsappLink);
+  const name = document.getElementById("name").value.trim();
+  if (!name) {
+    alert("Please enter your name.");
+    return;
   }
+
+  let message = `привіт, ${name} завершив(ла) Его тест, \nРезультати: \n`;
+  for (const [category, score] of Object.entries(egoScores)) {
+    message += `${category}: ${score}\n`;
+  }
+
+  const encodedMessage = encodeURIComponent(message);
+  const whatsappLink = `https://wa.me/380673120040?text=${encodedMessage}`;
+  window.location.href = whatsappLink;
+}
